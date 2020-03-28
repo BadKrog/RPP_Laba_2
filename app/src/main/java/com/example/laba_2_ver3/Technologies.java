@@ -34,12 +34,19 @@ public class Technologies {
             return "Technology {name:"+name+"; graphic:"+graphic+"; helptext:"+helptext+"}";
         }
 
+        // Setors
         public void setGraphic(String graphic) { this.graphic = graphic;}
         public void setName(String name) { this.name = name; }
         public void setHelptext(String helptext) { this.helptext = helptext; }
         public void setImage(Bitmap image) {
             this.image = image;
         }
+
+        // Getors
+        public String getGraphic() { return graphic; }
+        public String getName() { return name; }
+        public Bitmap getImage() { return image; }
+        public String getHelptext() { return helptext; }
     }
 }
 

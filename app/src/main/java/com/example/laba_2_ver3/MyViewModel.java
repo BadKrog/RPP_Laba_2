@@ -9,6 +9,8 @@ import androidx.lifecycle.ViewModel;
 
 import com.google.gson.Gson;
 
+import java.lang.reflect.Field;
+
 public class MyViewModel extends ViewModel {
     private MutableLiveData<Technologies> technologiesMLD;
 
@@ -25,9 +27,27 @@ public class MyViewModel extends ViewModel {
             // Загрузка картинок
             int sizeTecno = technologiesMLD.getValue().getTechnologies().size();
             for(int i=0; i<sizeTecno; i++){
-                    //technologiesMLD.getValue().getTechnologies().get(i).setImage(
-                          //  BitmapFactory.decodeResource(res,  .drawable.)
-                   // );
+
+                // Получаем название картинки
+                String nameImage = technologiesMLD.getValue().getTechnologies().get(i).getGraphic();
+
+                // Избавляемся от расширения
+                int lengthName = nameImage.length();
+                nameImage = nameImage.substring(0, lengthName-4);
+
+                // Получаем код изображения
+                int codeImage;
+                try {
+                    codeImage = R.drawable.class.getDeclaredField(nameImage).getInt(res);
+                }catch (Exception e){
+                    codeImage = R.drawable.advanced_flight;
+                }
+
+                // Сохраняем изображение
+                technologiesMLD.getValue().getTechnologies().get(i).setImage(
+                            BitmapFactory.decodeResource(res, codeImage
+                        )
+                );
             }
         }
     }

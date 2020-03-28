@@ -36,7 +36,7 @@ public class SecondActivity extends AppCompatActivity implements ListFragment.On
                     this.getViewModelStore(),
                     new ViewModelProvider.NewInstanceFactory()
                 ).get(MyViewModel.class);
-        model.loadTechnologies(jsonString);
+        model.loadTechnologies(jsonString, this.getResources());
 
         Log.d("MyTag", "Модель создана");
 
