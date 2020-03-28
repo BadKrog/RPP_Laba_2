@@ -12,7 +12,6 @@ import android.util.Log;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 
-import com.example.laba_2_ver3.dummy.DummyContent;
 
 public class SecondActivity extends AppCompatActivity implements ListFragment.OnListFragmentInteractionListener {
 
@@ -40,7 +39,7 @@ public class SecondActivity extends AppCompatActivity implements ListFragment.On
 
         Log.d("MyTag", "Модель создана");
 
-        frag = new ListFragment();
+        frag = new ListFragment(model);
         fragTrans = getSupportFragmentManager().beginTransaction();
         fragTrans.add(R.id.fragCont, frag);
         fragTrans.commit();
@@ -48,7 +47,7 @@ public class SecondActivity extends AppCompatActivity implements ListFragment.On
     }
 
     @Override
-    public void onListFragmentInteraction(DummyContent.DummyItem item) {
+    public void onListFragmentInteraction(Technologies.Technology item) {
         Log.d("MyTag", "Я не знаю что он хочет, но я вызвался");
     }
 }

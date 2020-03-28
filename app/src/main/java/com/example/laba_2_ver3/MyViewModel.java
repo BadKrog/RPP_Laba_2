@@ -22,7 +22,8 @@ public class MyViewModel extends ViewModel {
         if(technologiesMLD == null) {
             technologiesMLD = new MutableLiveData<Technologies>();
             Gson g = new Gson();
-            technologiesMLD.setValue(g.fromJson(jsonString.toString(), Technologies.class));
+            Technologies tempTechno = g.fromJson(jsonString.toString(), Technologies.class);
+            technologiesMLD.setValue(tempTechno);
 
             // Загрузка картинок
             int sizeTecno = technologiesMLD.getValue().getTechnologies().size();

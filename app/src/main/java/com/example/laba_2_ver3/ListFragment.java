@@ -4,6 +4,7 @@ import android.content.Context;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -11,9 +12,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
-import com.example.laba_2_ver3.dummy.DummyContent;
-import com.example.laba_2_ver3.dummy.DummyContent.DummyItem;
 
 import java.util.List;
 
@@ -25,6 +23,9 @@ import java.util.List;
  */
 public class ListFragment extends Fragment {
 
+    MyViewModel model;
+    Technologies myTechnologyes;
+
     // TODO: Customize parameter argument names
     private static final String ARG_COLUMN_COUNT = "column-count";
     // TODO: Customize parameters
@@ -35,6 +36,10 @@ public class ListFragment extends Fragment {
      * Mandatory empty constructor for the fragment manager to instantiate the
      * fragment (e.g. upon screen orientation changes).
      */
+    public ListFragment(MyViewModel model) {
+        this.model = model;
+    }
+
     public ListFragment() {
     }
 
@@ -52,9 +57,17 @@ public class ListFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+       /* model = new ViewModelProvider(
+                this.getViewModelStore(),
+                new ViewModelProvider.NewInstanceFactory()
+        ).get(MyViewModel.class);*/
+
         if (getArguments() != null) {
             mColumnCount = getArguments().getInt(ARG_COLUMN_COUNT);
         }
+
+        myTechnologyes = model.getTechnologiesMLD().getValue();
+
     }
 
     @Override
@@ -71,7 +84,7 @@ public class ListFragment extends Fragment {
             } else {
                 recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
             }
-            recyclerView.setAdapter(new MyItemRecyclerViewAdapter(DummyContent.ITEMS, mListener));
+            recyclerView.setAdapter(new MyItemRecyclerViewAdapter(myTechnologyes.getTechnologies(), mListener));
         }
         return view;
     }
@@ -106,6 +119,6 @@ public class ListFragment extends Fragment {
      */
     public interface OnListFragmentInteractionListener {
         // TODO: Update argument type and name
-        void onListFragmentInteraction(DummyItem item);
+        void onListFragmentInteraction(Technologies.Technology item);
     }
 }
