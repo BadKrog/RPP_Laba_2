@@ -2,9 +2,11 @@ package com.example.laba_2_ver3;
 
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.laba_2_ver3.ListFragment.OnListFragmentInteractionListener;
@@ -26,6 +28,7 @@ public class MyItemRecyclerViewAdapter extends RecyclerView.Adapter<MyItemRecycl
     public MyItemRecyclerViewAdapter(List<Technology> items, OnListFragmentInteractionListener listener) {
         mValues = items;
         mListener = listener;
+        Log.d("MyTag", "Я в MyItem, получил инфу:"+mValues.get(0).getName());
     }
 
     @Override
@@ -37,20 +40,25 @@ public class MyItemRecyclerViewAdapter extends RecyclerView.Adapter<MyItemRecycl
 
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
-        holder.mItem = mValues.get(position);
-        holder.mIdView.setText(mValues.get(position).getName());
-        holder.mContentView.setText(mValues.get(position).getName()/*mValues.get(position).content*/);
+        try {
+            holder.mItem = mValues.get(position);
+            holder.mIdView.setText("" + (position+1));
+            holder.mContentView.setText( mValues.get(position).getName());
+            holder.mImageView.setImageBitmap(mValues.get(position).getImage());
 
-        holder.mView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (null != mListener) {
-                    // Notify the active callbacks interface (the activity, if the
-                    // fragment is attached to one) that an item has been selected.
-                    mListener.onListFragmentInteraction(holder.mItem);
+            holder.mView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (null != mListener) {
+                        // Notify the active callbacks interface (the activity, if the
+                        // fragment is attached to one) that an item has been selected.
+                        mListener.onListFragmentInteraction(holder.mItem);
+                    }
                 }
-            }
-        });
+            });
+        }catch (Exception e){
+            Log.d("MyTag", "Я в MyItem, получил ошибку:"+ e);
+        }
     }
 
     @Override
@@ -62,13 +70,15 @@ public class MyItemRecyclerViewAdapter extends RecyclerView.Adapter<MyItemRecycl
         public final View mView;
         public final TextView mIdView;
         public final TextView mContentView;
+        public final ImageView mImageView;
         public Technology mItem;
 
         public ViewHolder(View view) {
             super(view);
             mView = view;
             mIdView = (TextView) view.findViewById(R.id.item_number);
-            mContentView = (TextView) view.findViewById(R.id.content);
+            mContentView = (TextView) view.findViewById(R.id.name);
+            mImageView = (ImageView) view.findViewById(R.id.imageView2);
         }
 
         @Override

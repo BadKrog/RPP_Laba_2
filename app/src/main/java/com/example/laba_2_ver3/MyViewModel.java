@@ -2,6 +2,7 @@ package com.example.laba_2_ver3;
 
 import android.content.res.Resources;
 import android.graphics.BitmapFactory;
+import android.util.Log;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
@@ -15,11 +16,14 @@ public class MyViewModel extends ViewModel {
     private MutableLiveData<Technologies> technologiesMLD;
 
     public LiveData<Technologies> getTechnologiesMLD() {
+        Log.d("MyTag", "Я в ViewModel, вернул данные");
         return technologiesMLD;
+
     }
 
     public void loadTechnologies(String jsonString, Resources res){
         if(technologiesMLD == null) {
+            Log.d("MyTag", "Я в ViewModel, загружаю данные");
             technologiesMLD = new MutableLiveData<Technologies>();
             Gson g = new Gson();
             Technologies tempTechno = g.fromJson(jsonString.toString(), Technologies.class);
@@ -40,8 +44,10 @@ public class MyViewModel extends ViewModel {
                 int codeImage;
                 try {
                     codeImage = R.drawable.class.getDeclaredField(nameImage).getInt(res);
+                    Log.d("MyTag", "Картинка загружена из ресурсв:"+nameImage);
                 }catch (Exception e){
                     codeImage = R.drawable.advanced_flight;
+                    Log.d("MyTag", "Картинка не найдена:"+nameImage);
                 }
 
                 // Сохраняем изображение
@@ -50,6 +56,7 @@ public class MyViewModel extends ViewModel {
                         )
                 );
             }
+            Log.d("MyTag", "Я в ViewModel, загрул какие-то данные:"+technologiesMLD.getValue().getTechnologies().get(0).getName());
         }
     }
 }

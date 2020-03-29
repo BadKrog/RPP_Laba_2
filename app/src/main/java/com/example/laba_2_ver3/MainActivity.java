@@ -50,9 +50,10 @@ public class MainActivity extends AppCompatActivity {
                 intent.putExtra("jsonString", e.toString());
             }
 
+            //установка флага
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+
             // Переход в новое активити
-
-
             startActivity(intent);
         }
     }

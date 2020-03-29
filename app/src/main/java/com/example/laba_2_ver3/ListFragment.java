@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -37,6 +38,7 @@ public class ListFragment extends Fragment {
      * fragment (e.g. upon screen orientation changes).
      */
     public ListFragment(MyViewModel model) {
+        Log.d("MyTag", "Я в ListFragment, создал фрагмент");
         this.model = model;
     }
 
@@ -67,7 +69,7 @@ public class ListFragment extends Fragment {
         }
 
         myTechnologyes = model.getTechnologiesMLD().getValue();
-
+        Log.d("MyTag", "Я в ListFragment, получил инфу из ViewModel:"+myTechnologyes.getTechnologies().get(0).getName());
     }
 
     @Override
