@@ -42,7 +42,7 @@ public class MyItemRecyclerViewAdapter extends RecyclerView.Adapter<MyItemRecycl
     public void onBindViewHolder(final ViewHolder holder, int position) {
         try {
             holder.mItem = mValues.get(position);
-            holder.mIdView.setText("" + (position+1));
+            holder.mIdView.setText("" + (position+1)+".");
             holder.mContentView.setText( mValues.get(position).getName());
             holder.mImageView.setImageBitmap(mValues.get(position).getImage());
 
