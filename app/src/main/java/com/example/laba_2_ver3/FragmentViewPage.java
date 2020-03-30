@@ -24,7 +24,6 @@ public class FragmentViewPage extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
     }
 
     @Override
@@ -32,7 +31,7 @@ public class FragmentViewPage extends Fragment {
                              Bundle savedInstanceState) {
         View result=inflater.inflate(R.layout.fragment_view_pager, container, false);
         ViewPager pager=(ViewPager)result.findViewById(R.id.frag_pager);
-        pager.setAdapter(new MyAdapterViewPage(getFragmentManager()));
+        pager.setAdapter(new MyAdapterViewPage(getFragmentManager(), model));
         return result;
     }
 }

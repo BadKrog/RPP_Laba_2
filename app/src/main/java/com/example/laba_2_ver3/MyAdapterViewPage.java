@@ -5,15 +5,21 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 
 public class MyAdapterViewPage extends FragmentPagerAdapter {
-    public MyAdapterViewPage(FragmentManager mgr) {
+
+    private MyViewModel model;
+
+    public MyAdapterViewPage(FragmentManager mgr, MyViewModel model) {
         super(mgr);
+        this.model = model;
     }
+
     @Override
     public int getCount() {
-        return(10);
+        return model.getSizeTechnologies();
     }
+
     @Override
     public Fragment getItem(int position) {
-        return(PageFragment.newInstance(position));
+        return(PageFragment.newInstance(position, model.getTechnologyIndex(position)));
     }
 }

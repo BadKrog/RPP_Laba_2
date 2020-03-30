@@ -8,6 +8,8 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
+import com.example.laba_2_ver3.Technologies.Technology;
+
 import com.google.gson.Gson;
 
 import java.lang.reflect.Field;
@@ -21,6 +23,18 @@ public class MyViewModel extends ViewModel {
 
     }
 
+    public int getSizeTechnologies(){
+        return technologiesMLD.getValue().getTechnologies().size();
+    }
+
+    public Technology getTechnologyIndex(int index){
+        if ((index >= 0)&&(index < getSizeTechnologies())) {
+            return technologiesMLD.getValue().getTechnologies().get(index);
+        }
+        else{
+            return null;
+        }
+    }
 
     public void loadTechnologies(String jsonString, Resources res){
         if(technologiesMLD == null) {
