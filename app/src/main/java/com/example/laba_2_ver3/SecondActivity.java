@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelStoreOwner;
+import androidx.viewpager.widget.ViewPager;
 
 import android.os.Bundle;
 import android.util.Log;
@@ -17,6 +18,7 @@ public class SecondActivity extends AppCompatActivity implements ListFragment.On
 
     TextView startText;
     ListFragment frag;
+    FragmentViewPage frag2;
     FragmentTransaction fragTrans;
     MyViewModel model;
 
@@ -39,11 +41,19 @@ public class SecondActivity extends AppCompatActivity implements ListFragment.On
 
         Log.d("MyTag", "Модель создана");
 
-        frag = new ListFragment(model);
+        /*frag = new ListFragment(model);
         fragTrans = getSupportFragmentManager().beginTransaction();
         fragTrans.add(R.id.fragCont, frag);
+        fragTrans.commit();*/
+
+        frag2 = new FragmentViewPage(model);
+        fragTrans = getSupportFragmentManager().beginTransaction();
+        fragTrans.add(R.id.fragCont, frag2);
         fragTrans.commit();
-        Log.d("MyTag", "Фрагмент создан");
+
+        /*ViewPager pager=(ViewPager)findViewById(R.id.pager);
+        pager.setAdapter(new MyAdapterViewPage(getSupportFragmentManager()));
+        Log.d("MyTag", "Фрагмент создан");*/
     }
 
     @Override

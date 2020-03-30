@@ -21,6 +21,7 @@ public class MyViewModel extends ViewModel {
 
     }
 
+
     public void loadTechnologies(String jsonString, Resources res){
         if(technologiesMLD == null) {
             Log.d("MyTag", "Я в ViewModel, загружаю данные");
