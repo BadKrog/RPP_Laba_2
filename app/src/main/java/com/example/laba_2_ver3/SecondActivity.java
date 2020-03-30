@@ -10,6 +10,7 @@ import androidx.viewpager.widget.ViewPager;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 
@@ -21,6 +22,7 @@ public class SecondActivity extends AppCompatActivity implements ListFragment.On
     FragmentViewPage frag2;
     FragmentTransaction fragTrans;
     MyViewModel model;
+    FrameLayout firstFrame;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,15 +43,14 @@ public class SecondActivity extends AppCompatActivity implements ListFragment.On
 
         Log.d("MyTag", "Модель создана");
 
-        /*frag = new ListFragment(model);
+        // Создаем список и добавляем на активити
+        frag = new ListFragment(model);
         fragTrans = getSupportFragmentManager().beginTransaction();
         fragTrans.add(R.id.fragCont, frag);
-        fragTrans.commit();*/
-
-        frag2 = new FragmentViewPage(model);
-        fragTrans = getSupportFragmentManager().beginTransaction();
-        fragTrans.add(R.id.fragCont, frag2);
         fragTrans.commit();
+
+        // Создаем ViewPager
+        frag2 = new FragmentViewPage(model);
 
         /*ViewPager pager=(ViewPager)findViewById(R.id.pager);
         pager.setAdapter(new MyAdapterViewPage(getSupportFragmentManager()));
@@ -57,7 +58,10 @@ public class SecondActivity extends AppCompatActivity implements ListFragment.On
     }
 
     @Override
-    public void onListFragmentInteraction(Technologies.Technology item) {
-        Log.d("MyTag", "Я не знаю что он хочет, но я вызвался");
+    public void onListFragmentInteraction(Technologies.Technology item, int num) {
+        Log.d("MyTag", "Я не знаю что он хочет, но я вызвался и получил число num:"+num);
+        fragTrans.detach(frag);
+        fragTrans.add(R.id.fragCont, frag2);
+        fragTrans.commit();
     }
 }

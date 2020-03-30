@@ -49,10 +49,18 @@ public class MyItemRecyclerViewAdapter extends RecyclerView.Adapter<MyItemRecycl
             holder.mView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    // Подучаем номер View текстом
+                    TextView text = (TextView)v.findViewById(R.id.item_number);
+                    String numStr = (String)text.getText();
+                    numStr = numStr.substring(0, numStr.length()-1);
+
+                    // Переводим в интеджер
+                    int num = Integer.parseInt(numStr);
+
                     if (null != mListener) {
                         // Notify the active callbacks interface (the activity, if the
                         // fragment is attached to one) that an item has been selected.
-                        mListener.onListFragmentInteraction(holder.mItem);
+                        mListener.onListFragmentInteraction(holder.mItem, num-1);
                     }
                 }
             });
