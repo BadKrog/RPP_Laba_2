@@ -23,11 +23,31 @@ public class SecondActivity extends AppCompatActivity implements ListFragment.On
     FragmentTransaction fragTrans;
     MyViewModel model;
     FrameLayout firstFrame;
+    boolean needExit;
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        if (needExit){
+            finish();
+        }
+        else{
+            fragTrans.remove(frag2);
+            fragTrans = getSupportFragmentManager().beginTransaction();
+            fragTrans.replace(R.id.fragCont, frag).addToBackStack("list_fragment");
+            fragTrans.commit();
+            needExit = true;
+        }
+
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_second);
+
+        needExit = true;
+
         // Получаем json файл из первого активити
         Bundle arguments = getIntent().getExtras();
         String jsonString = arguments.get("jsonString").toString();
@@ -45,13 +65,11 @@ public class SecondActivity extends AppCompatActivity implements ListFragment.On
 
         // Создаем список и добавляем на активити
         frag = new ListFragment(model);
+
+
         fragTrans = getSupportFragmentManager().beginTransaction();
-        fragTrans.add(R.id.fragCont, frag);
+        fragTrans.add(R.id.fragCont, frag).addToBackStack("list_fragment");
         fragTrans.commit();
-
-        // Создаем ViewPager
-        frag2 = new FragmentViewPage(model);
-
         /*ViewPager pager=(ViewPager)findViewById(R.id.pager);
         pager.setAdapter(new MyAdapterViewPage(getSupportFragmentManager()));
         Log.d("MyTag", "Фрагмент создан");*/
@@ -60,8 +78,14 @@ public class SecondActivity extends AppCompatActivity implements ListFragment.On
     @Override
     public void onListFragmentInteraction(Technologies.Technology item, int num) {
         Log.d("MyTag", "Я не знаю что он хочет, но я вызвался и получил число num:"+num);
-        fragTrans.detach(frag);
-        fragTrans.add(R.id.fragCont, frag2);
+        // Создаем ViewPager
+        frag2 = new FragmentViewPage(model);
+        frag2.setPage(num);
+        fragTrans.remove(frag);
+        fragTrans = getSupportFragmentManager().beginTransaction();
+        fragTrans.replace(R.id.fragCont, frag2).addToBackStack("page_fragment");
         fragTrans.commit();
+        needExit = false;
+
     }
 }
