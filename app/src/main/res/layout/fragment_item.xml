@@ -19,7 +19,8 @@
         android:layout_weight="0"
         android:fontFamily="monospace"
         android:textAppearance="?attr/textAppearanceListItem"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        android:text="1."/>
 
     <TextView
         android:id="@+id/name"
@@ -33,7 +34,8 @@
         android:fontFamily="monospace"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
         android:textSize="18sp"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        android:text="Name"/>
 
     <ImageView
         android:id="@+id/imageView2"
