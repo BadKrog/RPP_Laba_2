@@ -20,3 +20,17 @@ name, graphics, helptext и image, первые три имеют тип String,
 этого фрагмент подгружает всю информацию из ViewModel в адаптер списка. Все это выводится на экран смартфона. Как только произошло нажатие
 на какой-нибудь элемент списка, второе активити через интерфейс получает данное событие, и открывает второй фрагмент с ViewPager. Дальше,
 может быть нажата кнопка "назад", тогда программа опять вернется к списку, при повторном нажатии, программа закрывается.
+
+Скриншоты из приложения:
+
+
+Список
+
+![Список в программе](https://github.com/BadKrog/RPP_Laba_2/blob/master/imagesForGit/Screenshot_list.jpg)
+
+Страница в ViewPager (объект без описания)
+![Страница без helptext](https://github.com/BadKrog/RPP_Laba_2/blob/master/imagesForGit/Screenshot_page_without_helptext.jpg)
+
+Страница в ViewPager (объект с описанием)
+![Страница c helptext](https://github.com/BadKrog/RPP_Laba_2/blob/master/imagesForGit/Screenshot_page_with_helptext.jpg)
+
